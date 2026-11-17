@@ -103,6 +103,7 @@
       <!-- Menu Navigasi Desktop -->
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
         <a href="#katalog" class="hover:text-sky-700 transition-colors">6 Judul Buku</a>
+        <a href="#form-order" class="hover:text-sky-700 transition-colors font-semibold text-sky-700">Form Pemesanan</a>
         <a href="#bundling" class="hover:text-sky-700 transition-colors">Bundling & Kolektif</a>
         <a href="#faq" class="hover:text-sky-700 transition-colors">Tanya Jawab (FAQ)</a>
       </nav>
@@ -179,12 +180,11 @@
               <span aria-hidden="true">↓</span>
             </a>
             <a
-              href="https://wa.me/6285175132050?text=Assalamu'alaikum%20Kak%2C%20saya%20mau%20konsultasi%20pilihan%20buku%20ITAF%20Press%20untuk%20persiapan%202027."
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-sm px-5 py-3.5 rounded-xl transition-all"
+              href="#form-order"
+              class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-bold text-sm px-5 py-3.5 rounded-xl shadow-sm transition-all"
             >
-              <span>Tanya Rekomendasi via WA</span>
+              <span>Isi Form Pemesanan</span>
+              <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -307,6 +307,216 @@
     </div>
 
   </main>
+
+  <!-- SECTION FORMULIR PEMESANAN LANGSUNG (DIRECT ORDER TO WHATSAPP) -->
+  <section id="form-order" class="max-w-6xl mx-auto px-5 sm:px-6 py-8 scroll-mt-20">
+    <div class="bg-white rounded-3xl border border-slate-200/90 shadow-md overflow-hidden">
+      <!-- Header Form -->
+      <div class="bg-gradient-to-r from-sky-800 via-sky-700 to-emerald-700 px-5 sm:px-8 py-6 text-white">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider bg-white/15 text-amber-200 px-3 py-1 rounded-full">
+              📝 FORMULIR PEMESANAN RESMI
+            </span>
+            <h2 class="text-xl sm:text-2xl font-extrabold mt-2 leading-snug">
+              Isi Data Pemesanan Buku ITAF Press
+            </h2>
+            <p class="text-xs sm:text-sm text-sky-100 mt-1 max-w-2xl">
+              Pilih judul buku & lengkapi alamat pengiriman di bawah ini. Rincian pesanan akan otomatis terformat dan langsung terkirim ke WhatsApp Mitra Reseller (<strong>0851-7513-2050</strong>).
+            </p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl px-4 py-2.5 text-xs">
+            <div class="font-bold text-emerald-200">🚚 FREE ONGKIR PULAU JAWA</div>
+            <div class="text-sky-100 text-[11px] mt-0.5">Luar Jawa dicekkan tarif hemat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Body -->
+      <form id="direct-order-form" onsubmit="submitOrderToWa(event)" novalidate class="p-5 sm:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Kolom Kiri: Pilihan Buku & Input Data Penerima -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Langkah 1: Pilih Judul & Jumlah Buku -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <label class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-full bg-sky-700 text-white text-xs flex items-center justify-center font-bold">1</span>
+                  <span>Pilih Judul & Jumlah Buku <span class="text-rose-600">*</span></span>
+                </label>
+                <span class="text-[11px] font-medium text-slate-500">Bisa pilih lebih dari 1 judul</span>
+              </div>
+
+              <div id="form-book-list" class="space-y-2.5">
+                <!-- Daftar buku interaktif dengan stepper qty dirender via JS -->
+              </div>
+            </div>
+
+            <hr class="border-slate-200" />
+
+            <!-- Langkah 2: Data Penerima & Alamat Pengiriman -->
+            <div class="space-y-4">
+              <div class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-sky-700 text-white text-xs flex items-center justify-center font-bold">2</span>
+                <span>Data Penerima & Alamat Pengiriman</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="order-name" class="block text-xs font-bold text-slate-700 mb-1.5">
+                    Nama Lengkap Penerima <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="order-name"
+                    required
+                    placeholder="Contoh: Ahmad Fauzan"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label for="order-phone" class="block text-xs font-bold text-slate-700 mb-1.5">
+                    Nomor WhatsApp Aktif <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="order-phone"
+                    required
+                    placeholder="Contoh: 081234567890"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+                  />
+                </div>
+              </div>
+
+              <!-- Pilihan Wilayah Ongkir -->
+              <div>
+                <span class="block text-xs font-bold text-slate-700 mb-1.5">
+                  Wilayah Pengiriman <span class="text-rose-600">*</span>
+                </span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="relative flex items-start gap-3 p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50/50 cursor-pointer transition-all" id="region-card-jawa">
+                    <input
+                      type="radio"
+                      name="shipping_region"
+                      value="jawa"
+                      checked
+                      onchange="handleRegionChange()"
+                      class="mt-1 accent-emerald-600 w-4 h-4"
+                    />
+                    <div class="text-xs">
+                      <div class="font-extrabold text-slate-900">Pulau Jawa</div>
+                      <div class="text-emerald-700 font-bold mt-0.5">🚚 GRATIS ONGKIR (Rp 0)</div>
+                    </div>
+                  </label>
+
+                  <label class="relative flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 cursor-pointer transition-all" id="region-card-luar">
+                    <input
+                      type="radio"
+                      name="shipping_region"
+                      value="luar-jawa"
+                      onchange="handleRegionChange()"
+                      class="mt-1 accent-sky-600 w-4 h-4"
+                    />
+                    <div class="text-xs">
+                      <div class="font-extrabold text-slate-900">Luar Pulau Jawa</div>
+                      <div class="text-slate-500 font-medium mt-0.5">Cek tarif ekspedisi hemat via WA</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Alamat Lengkap -->
+              <div>
+                <label for="order-address" class="block text-xs font-bold text-slate-700 mb-1.5">
+                  Alamat Lengkap Pengiriman <span class="text-rose-600">*</span>
+                </label>
+                <textarea
+                  id="order-address"
+                  rows="3"
+                  required
+                  placeholder="Tulis Nama Jalan/Dusun, RT/RW, Desa/Kelurahan, Kecamatan, Kota/Kabupaten, Provinsi & Kode Pos"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+                ></textarea>
+              </div>
+
+              <!-- Asal Sekolah / Pesantren / Catatan -->
+              <div>
+                <label for="order-notes" class="block text-xs font-bold text-slate-700 mb-1.5">
+                  Asal Sekolah / Pesantren / Catatan <span class="text-slate-400 font-normal">(Opsional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="order-notes"
+                  placeholder="Contoh: MA Al-Irsyad / Pesantren / Pesanan Kolektif"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+                />
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Kolom Kanan: Ringkasan Pesanan & Tombol Kirim WA -->
+          <div class="lg:col-span-5 lg:sticky lg:top-24">
+            <div class="bg-slate-900 text-white rounded-3xl p-5 sm:p-7 shadow-xl border border-slate-800 space-y-5">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3.5">
+                <h3 class="text-base sm:text-lg font-extrabold">Ringkasan Pesanan Anda</h3>
+                <span id="summary-badge-qty" class="text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded-lg">
+                  1 Buku
+                </span>
+              </div>
+
+              <!-- Daftar Item Terpilih -->
+              <div id="summary-items-list" class="space-y-2.5 text-xs sm:text-sm max-h-56 overflow-y-auto pr-1">
+                <!-- Diisi dinamis oleh JS -->
+              </div>
+
+              <!-- Rincian Subtotal & Ongkir -->
+              <div class="border-t border-slate-800 pt-4 space-y-2.5 text-xs sm:text-sm">
+                <div class="flex items-center justify-between text-slate-300">
+                  <span>Subtotal Harga Buku</span>
+                  <span id="summary-subtotal" class="font-semibold text-white">Rp 220.000</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-300">
+                  <span>Ongkos Kirim</span>
+                  <span id="summary-shipping" class="font-bold text-emerald-400">GRATIS (Pulau Jawa)</span>
+                </div>
+                <div class="border-t border-slate-800 pt-3 flex items-baseline justify-between">
+                  <span class="font-bold text-slate-200">Estimasi Total Bayar</span>
+                  <span id="summary-grand-total" class="text-xl sm:text-2xl font-extrabold text-amber-300">Rp 220.000</span>
+                </div>
+                <p id="summary-shipping-note" class="text-[11px] text-slate-400 leading-relaxed">
+                  *Sudah termasuk promo Gratis Ongkir ke seluruh wilayah Pulau Jawa.
+                </p>
+              </div>
+
+              <!-- Kotak Pesan Validasi Error (Pengganti alert) -->
+              <div id="form-error-box" class="hidden bg-rose-500/15 border border-rose-400/40 text-rose-200 text-xs rounded-xl px-4 py-3 leading-relaxed">
+              </div>
+
+              <!-- Tombol Submit Kirim ke WA -->
+              <button
+                type="submit"
+                class="w-full inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-500 active:scale-[0.99] text-white font-extrabold text-sm sm:text-base py-4 px-5 rounded-2xl shadow-lg transition-all cursor-pointer"
+              >
+                <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.42ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.88 9.89Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/>
+                </svg>
+                <span>Kirim Pesanan ke WhatsApp</span>
+              </button>
+
+              <div class="text-[11px] text-slate-400 text-center leading-relaxed">
+                🔒 Pesanan langsung terhubung ke WhatsApp Mitra Reseller Resmi (<strong class="text-slate-200">0851-7513-2050</strong>). Pembayaran dilakukan setelah konfirmasi stok & rincian resi.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
 
   <!-- SECTION BUNDLING & PESANAN KOLEKTIF + BUKTI DISTRIBUSI RIIL -->
   <section id="bundling" class="max-w-6xl mx-auto px-5 sm:px-6 py-8">
@@ -449,7 +659,7 @@
           <span class="faq-icon text-sky-700 text-xl font-normal transition-transform">+</span>
         </button>
         <div class="faq-content hidden px-5 pb-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-          Klik tombol <strong>"Pesan via WA"</strong> pada buku yang Anda pilih (atau gunakan fitur <strong>"+ Pilih Bundling"</strong> jika ingin memesan beberapa judul sekaligus). Anda akan langsung terhubung ke WhatsApp Mitra Reseller (<strong>0851-7513-2050</strong>) untuk konfirmasi stok, alamat pengiriman, serta rincian pembayaran.
+          Cukup pilih judul buku yang diinginkan lalu isi data penerima di bagian <strong>Formulir Pemesanan</strong> di halaman ini, kemudian klik <strong>"Kirim Pesanan ke WhatsApp"</strong>. Data pesanan Anda otomatis terformat rapi dan langsung terkirim ke WhatsApp Mitra Reseller (<strong>0851-7513-2050</strong>) untuk konfirmasi stok, alamat pengiriman, serta info pembayaran.
         </div>
       </div>
     </div>
@@ -468,14 +678,14 @@
     </div>
   </footer>
 
-  <!-- FLOATING BUNDLING BAR (Muncul otomatis ketika user memilih >= 1 buku ke keranjang bundling) -->
+  <!-- FLOATING BUNDLING BAR (Muncul otomatis ketika user memilih >= 1 buku dari katalog) -->
   <div id="bundling-bar" class="fixed bottom-0 inset-x-0 z-50 bg-slate-900 text-white border-t border-slate-700 shadow-2xl transform translate-y-full transition-transform duration-300">
     <div class="max-w-6xl mx-auto px-5 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
       <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
         <div>
           <div class="text-xs text-slate-300 flex items-center gap-2">
             <span id="bundling-count" class="bg-sky-500 text-white font-bold px-2 py-0.5 rounded-md">0 Buku</span>
-            <span>Dipilih untuk Pesanan</span>
+            <span>Dipilih di Form Order</span>
             <span class="text-emerald-400 font-semibold hidden md:inline">• FREE Ongkir Pulau Jawa</span>
           </div>
           <div class="text-base sm:text-lg font-extrabold text-white mt-0.5">
@@ -488,16 +698,12 @@
       </div>
 
       <a
-        id="bundling-wa-link"
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
+        href="#form-order"
+        onclick="focusOrderForm()"
         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl shadow-md transition-all"
       >
-        <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.42ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.88 9.89Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/>
-        </svg>
-        <span>Pesan Paket Terpilih via WA</span>
+        <span>Lanjut Isi Form Pemesanan</span>
+        <span aria-hidden="true">→</span>
       </a>
     </div>
   </div>
@@ -505,15 +711,12 @@
   <!-- STICKY MOBILE CTA BAR (Tampil di mobile saat bundling bar tidak aktif) -->
   <div id="mobile-sticky-cta" class="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-5 py-3 shadow-lg">
     <a
-      href="https://wa.me/6285175132050?text=Assalamu'alaikum%20Kak%2C%20saya%20mau%20pesan%20buku%20ITAF%20Press%20dan%20klaim%20Free%20Ongkir%20Pulau%20Jawa."
-      target="_blank"
-      rel="noopener noreferrer"
+      href="#form-order"
+      onclick="focusOrderForm()"
       class="w-full flex items-center justify-center gap-2 bg-green-600 active:bg-green-700 text-white font-bold text-sm py-3 rounded-xl shadow-sm"
     >
-      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.42ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.88 9.89Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/>
-      </svg>
-      <span>Order Buku via WhatsApp (0851-7513-2050)</span>
+      <span>📝 Isi Form Pemesanan Buku</span>
+      <span aria-hidden="true">→</span>
     </a>
   </div>
 
@@ -599,18 +802,14 @@
           >
             Kembali ke Katalog
           </button>
-          <a
-            id="modal-wa-btn"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-sm transition-all"
+          <button
+            type="button"
+            id="modal-order-btn"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
           >
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.42ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.88 9.89Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/>
-            </svg>
-            <span>Pesan Buku Ini via WA</span>
-          </a>
+            <span>📝 Pesan Buku Ini di Form</span>
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
 
       </div>
@@ -619,44 +818,38 @@
 
   <!-- DATA & INTERACTIVE SCRIPT -->
   <script>
-    // Nomor WhatsApp Mitra Reseller (Format internasional tanpa tanda +)
+    // Nomor WhatsApp Mitra Reseller Resmi
     const WA_PHONE = '6285175132050';
 
-    /**
-     * Database Katalog 6 Buku Resmi ITAF Press
-     * CATATAN UNTUK PEMILIK:
-     * Untuk mengganti gambar cover atau menambah hasil capture halaman isi tiap buku,
-     * cukup ubah URL di properti `coverImage` dan array `samplePages` di bawah ini
-     * dengan path/URL gambar milik Anda (misal: "images/cover-kampus-saudi.jpg").
-     */
+    // Data lengkap 6 produk resmi ITAF Press (Ganti URL coverImage & samplePages dengan foto/capture asli Anda)
     const BOOKS_DATA = [
       {
         id: 'kampus-saudi',
-        category: 'saudi',
-        categoryLabel: 'Kampus Arab Saudi',
-        badge: 'PRIMADONA UTAMA',
-        badgeColor: 'bg-amber-500 text-white',
         title: 'Sukses Masuk Kampus Saudi',
         subtitle: 'Kupas Tuntas 1.500 Soal Try Out Ikhtibar Hamzah + Pembahasan',
+        category: 'saudi',
+        categoryLabel: 'Arab Saudi & Study in Saudi',
         price: 220000,
         priceFormatted: 'Rp 220.000',
-        coverImage: 'https://placehold.co/600x750/0D7A5F/FFFFFF?text=SUKSES+MASUK%0AKAMPUS+SAUDI%0A(1.500+Soal+Ikhtibar+Hamzah)',
+        badge: 'Best Seller',
+        badgeColor: 'bg-amber-400 text-slate-950',
+        coverImage: 'https://placehold.co/600x750/065F46/FFFFFF?text=SUKSES+MASUK%0AKAMPUS+SAUDI%0A%0A1.500+Soal+Hamzah%0A%2B+Pembahasan',
         samplePages: [
           {
-            label: 'Cover Depan',
-            url: 'https://placehold.co/600x750/0D7A5F/FFFFFF?text=Cover+Depan%0ASukses+Masuk+Kampus+Saudi'
+            url: 'https://placehold.co/600x750/065F46/FFFFFF?text=Cover+Depan%0ASukses+Masuk+Kampus+Saudi',
+            label: 'Cover Depan'
           },
           {
-            label: 'Cover Belakang & Daftar Isi',
-            url: 'https://placehold.co/600x750/065F46/FFFFFF?text=Cover+Belakang%0AProfil+20+Kampus+%26+1500+Soal'
+            url: 'https://placehold.co/600x750/047857/FFFFFF?text=Slot+Foto%0ACover+Belakang+%2F+Daftar+Isi',
+            label: 'Cover Belakang / Daftar Isi'
           },
           {
-            label: 'Slot Capture Halaman Isi',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Isi+Buku%0A(Ganti+dengan+Foto+Halaman+Isi)'
+            url: 'https://placehold.co/600x750/1E293B/FFFFFF?text=Slot+Capture%0AContoh+Halaman+Soal+%26+Pembahasan',
+            label: 'Contoh Halaman Isi'
           }
         ],
-        shortDesc: 'Panduan lengkap pendaftaran portal Study in Saudi, profil & info beasiswa 20 kampus Arab Saudi, serta 1.500 soal Try Out Ikhtibar Hamzah model 2025 & 2026.',
-        fullSynopsis: 'Buku ini mengupas tuntas persiapan pendaftaran beasiswa universitas di Arab Saudi serta materi Ujian Hamzah (Ikhtibar Hamzah) sebagai salah satu tahapan seleksi masuk perguruan tinggi di Arab Saudi. Disusun oleh tim penulis yang berpengalaman membimbing ribuan calon mahasiswa hingga meraih beasiswa studi ke berbagai kampus top Timur Tengah. Telah disesuaikan dengan model soal Ikhtibar Hamzah terbaru tahun 2025 & 2026.',
+        shortDesc: 'Panduan lengkap pendaftaran beasiswa 20 kampus Arab Saudi via Study in Saudi serta bedah 1.500 soal Try Out Ikhtibar Hamzah model 2025 & 2026 lengkap dengan pembahasan.',
+        fullSynopsis: 'Buku panduan menyeluruh yang mengupas tuntas persiapan pendaftaran beasiswa universitas di Arab Saudi serta materi Ujian Hamzah (Ikhtibar Hamzah). Materi telah disesuaikan dengan model soal Ikhtibar Hamzah terbaru tahun 2025 & 2026, dilengkapi profil & info beasiswa 20 kampus Arab Saudi, serta tutorial pendaftaran portal terpadu Study in Saudi dari awal hingga tuntas.',
         highlights: [
           'Profil 20 Kampus Arab Saudi',
           'Info Beasiswa 20 Kampus Saudi',
@@ -670,189 +863,226 @@
       },
       {
         id: 'syariah-lipia',
-        category: 'lipia',
-        categoryLabel: 'Jalur LIPIA',
-        badge: 'FAKULTAS SYARIAH',
-        badgeColor: 'bg-teal-600 text-white',
         title: 'Sukses Masuk Syariah LIPIA',
         subtitle: 'Bedah Bank Soal Syariah LIPIA Terbaru dan Ringkasan Materi Ujian',
+        category: 'lipia',
+        categoryLabel: 'Jalur LIPIA (Syariah)',
         price: 199000,
         priceFormatted: 'Rp 199.000',
-        coverImage: 'https://placehold.co/600x750/0F766E/FFFFFF?text=SUKSES+MASUK%0ASYARIAH+LIPIA%0A(Bedah+Bank+Soal+Terbaru)',
+        badge: 'Favorit LIPIA',
+        badgeColor: 'bg-teal-600 text-white',
+        coverImage: 'https://placehold.co/600x750/0F766E/FFFFFF?text=SUKSES+MASUK%0ASYARIAH+LIPIA%0A%0ABedah+Bank+Soal%0A%26+Ringkasan+Materi',
         samplePages: [
           {
-            label: 'Cover Depan',
-            url: 'https://placehold.co/600x750/0F766E/FFFFFF?text=Cover+Depan%0ASukses+Masuk+Syariah+LIPIA'
+            url: 'https://placehold.co/600x750/0F766E/FFFFFF?text=Cover+Depan%0ASukses+Masuk+Syariah+LIPIA',
+            label: 'Cover Depan'
           },
           {
-            label: 'Slot Capture Daftar Isi',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Daftar+Isi%0A(Ganti+dengan+Foto+Isi)'
+            url: 'https://placehold.co/600x750/115E59/FFFFFF?text=Slot+Foto%0ACover+Belakang+%2F+Daftar+Isi',
+            label: 'Cover Belakang / Daftar Isi'
           },
           {
-            label: 'Slot Capture Contoh Soal',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Contoh+Soal%0A(Ganti+dengan+Foto+Soal)'
+            url: 'https://placehold.co/600x750/1E293B/FFFFFF?text=Slot+Capture%0AContoh+Halaman+Soal+Syariah',
+            label: 'Contoh Halaman Isi'
           }
         ],
-        shortDesc: 'Panduan belajar terarah bagi calon mahasiswa Fakultas Syariah LIPIA. Memuat ringkasan materi inti ujian dan bedah bank soal Syariah LIPIA terbaru.',
-        fullSynopsis: 'Panduan belajar komprehensif yang dirancang khusus bagi calon mahasiswa Fakultas Syariah LIPIA (lulusan pesantren, MA, maupun alumni I\'dad Lughowi / Takmili). Memuat ringkasan materi ujian yang sistematis serta bedah bank soal seleksi Syariah LIPIA terbaru agar belajar jauh lebih fokus dan terarah.',
+        shortDesc: 'Panduan komprehensif bagi calon mahasiswa Fakultas Syariah LIPIA (lulusan pesantren, MA, maupun alumni I\'dad/Takmili) berisi ringkasan materi ujian & bedah bank soal terbaru.',
+        fullSynopsis: 'Panduan belajar komprehensif yang dirancang khusus bagi calon mahasiswa Fakultas Syariah LIPIA, baik dari kalangan lulusan pesantren, Madrasah Aliyah, maupun alumni program persiapan bahasa (I\'dad Lughowi / Takmili). Memuat ringkasan materi ujian yang terstruktur serta bedah bank soal seleksi Syariah LIPIA terbaru agar belajar lebih fokus dan terarah.',
         highlights: [
           'Ringkasan materi inti ujian seleksi Fakultas Syariah LIPIA',
           'Bedah bank soal Syariah LIPIA terbaru',
           'Pembahasan soal sistematis & mudah dipahami',
-          'Strategi pengerjaan soal menghadapi tahapan seleksi'
+          'Pemetaan topik yang sering diujikan',
+          'Latihan soal terukur untuk evaluasi mandiri',
+          'Tips & strategi menghadapi tahapan seleksi masuk'
         ]
       },
       {
         id: 'lughoh-lipia',
-        category: 'lipia',
-        categoryLabel: 'Jalur LIPIA',
-        badge: 'I\'DAD & SASTRA ARAB',
-        badgeColor: 'bg-blue-700 text-white',
         title: 'Bank Soal Lughoh LIPIA',
         subtitle: 'Kupas Tuntas Soal Tahdid & Prodi Sastra Arab LIPIA Terbaru + Ringkasan Materi Inti',
+        category: 'lipia',
+        categoryLabel: 'Jalur LIPIA (Lughoh & Sastra)',
         price: 188000,
         priceFormatted: 'Rp 188.000',
-        coverImage: 'https://placehold.co/600x750/1D4ED8/FFFFFF?text=BANK+SOAL%0ALUGHOH+LIPIA%0A(Tahdid+%26+Sastra+Arab)',
+        badge: 'Terlaris Lughoh',
+        badgeColor: 'bg-sky-600 text-white',
+        coverImage: 'https://placehold.co/600x750/0369A1/FFFFFF?text=BANK+SOAL%0ALUGHOH+LIPIA%0A%0ASoal+Tahdid+%26%0ASastra+Arab+LIPIA',
         samplePages: [
           {
-            label: 'Cover Depan',
-            url: 'https://placehold.co/600x750/1D4ED8/FFFFFF?text=Cover+Depan%0ABank+Soal+Lughoh+LIPIA'
+            url: 'https://placehold.co/600x750/0369A1/FFFFFF?text=Cover+Depan%0ABank+Soal+Lughoh+LIPIA',
+            label: 'Cover Depan'
           },
           {
-            label: 'Slot Capture Ringkasan Materi',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Materi%0A(Nahwu,+Shorof,+Balaghah)'
+            url: 'https://placehold.co/600x750/075985/FFFFFF?text=Slot+Foto%0ACover+Belakang+%2F+Daftar+Isi',
+            label: 'Cover Belakang / Daftar Isi'
           },
           {
-            label: 'Slot Capture Bank Soal',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Bank+Soal%0A(Ganti+dengan+Foto+Soal)'
+            url: 'https://placehold.co/600x750/1E293B/FFFFFF?text=Slot+Capture%0AContoh+Halaman+Soal+Lughoh',
+            label: 'Contoh Halaman Isi'
           }
         ],
-        shortDesc: 'Kupas tuntas soal Tahdid & Prodi Sastra Arab LIPIA terbaru disertai ringkasan materi inti Nahwu, Shorof, Balaghah, Qira\'ah, dan Mufradat.',
-        fullSynopsis: 'Buku latihan intensif untuk menaklukkan ujian seleksi bahasa Arab di LIPIA, baik untuk penempatan tingkat (Tahdid) maupun Program Studi Sastra Arab LIPIA. Dilengkapi ringkasan materi inti kebahasaan (Nahwu, Shorof, Balaghah, Qira\'ah, dan Mufradat) serta kupas tuntas bank soal terbaru.',
+        shortDesc: 'Buku latihan intensif untuk menaklukkan ujian seleksi bahasa Arab di LIPIA, baik untuk penempatan tingkat (Tahdid) maupun Program Studi Sastra Arab LIPIA.',
+        fullSynopsis: 'Buku latihan intensif untuk menaklukkan ujian seleksi bahasa Arab di LIPIA, baik untuk penempatan tingkat (Tahdid Mustawa / I\'dad Lughowi) maupun Program Studi Sastra Arab LIPIA. Dilengkapi ringkasan materi inti kebahasaan (Nahwu, Shorof, Balaghah, Qira\'ah, dan Mufradat) serta kupas tuntas bank soal terbaru.',
         highlights: [
-          'Ringkasan materi inti: Nahwu, Shorof, Balaghah & Qira\'ah',
-          'Kupas tuntas soal Tahdid Mustawa LIPIA terbaru',
-          'Kupas tuntas soal Prodi Sastra Arab LIPIA',
-          'Pembahasan soal lengkap untuk melatih ketepatan'
+          'Ringkasan materi inti bahasa Arab (Nahwu, Shorof, Balaghah)',
+          'Kupas tuntas soal Tahdid tingkat bahasa LIPIA',
+          'Bank soal seleksi Prodi Sastra Arab LIPIA terbaru',
+          'Pembahasan lengkap untuk melatih ketepatan menjawab',
+          'Latihan pemahaman bacaan (Qira\'ah) & kosakata',
+          'Strategi menaikkan level penempatan kelas di LIPIA'
         ]
       },
       {
         id: 'tahdid-uim',
-        category: 'saudi',
-        categoryLabel: 'Kampus Arab Saudi & UIM',
-        badge: 'PERSIAPAN UIM',
-        badgeColor: 'bg-amber-700 text-white',
         title: 'Sukses Tes Tahdid Mustawa UIM',
         subtitle: 'Bedah Bank Soal Persiapan Tahdid Mustawa UIM (Universitas Islam Madinah)',
+        category: 'saudi',
+        categoryLabel: 'Universitas Islam Madinah',
         price: 169000,
         priceFormatted: 'Rp 169.000',
-        coverImage: 'https://placehold.co/600x750/92400E/FFFFFF?text=SUKSES+TES%0ATAHDID+MUSTAWA+UIM%0A(Universitas+Islam+Madinah)',
+        badge: 'Khusus UIM',
+        badgeColor: 'bg-amber-700 text-white',
+        coverImage: 'https://placehold.co/600x750/78350F/FFFFFF?text=SUKSES+TES%0ATAHDID+MUSTAWA%0AUIM%0A%0ABedah+Bank+Soal+UIM',
         samplePages: [
           {
-            label: 'Cover Depan',
-            url: 'https://placehold.co/600x750/92400E/FFFFFF?text=Cover+Depan%0ASukses+Tes+Tahdid+Mustawa+UIM'
+            url: 'https://placehold.co/600x750/78350F/FFFFFF?text=Cover+Depan%0ASukses+Tes+Tahdid+Mustawa+UIM',
+            label: 'Cover Depan'
           },
           {
-            label: 'Slot Capture Kisi-Kisi UIM',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Kisi-Kisi%0A(Ganti+dengan+Foto+Isi)'
+            url: 'https://placehold.co/600x750/92400E/FFFFFF?text=Slot+Foto%0ACover+Belakang+%2F+Daftar+Isi',
+            label: 'Cover Belakang / Daftar Isi'
           },
           {
-            label: 'Slot Capture Latihan Soal',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Latihan+Soal%0A(Ganti+dengan+Foto+Soal)'
+            url: 'https://placehold.co/600x750/1E293B/FFFFFF?text=Slot+Capture%0AContoh+Halaman+Soal+UIM',
+            label: 'Contoh Halaman Isi'
           }
         ],
-        shortDesc: 'Bedah bank soal persiapan Tes Tahdid Mustawa Universitas Islam Madinah (UIM) untuk mengukur dan memaksimalkan penempatan level bahasa Arab.',
-        fullSynopsis: 'Buku panduan khusus untuk menghadapi Tes Tahdid Mustawa Universitas Islam Madinah (UIM)—ujian penempatan level kemampuan bahasa Arab yang menentukan jalur studi mahasiswa (langsung masuk jenjang S1 / Kulliyyah atau mengikuti program persiapan bahasa di Ma\'had Lughoh). Memuat bedah bank soal dan kisi-kisi persiapan terbaru.',
+        shortDesc: 'Panduan khusus menghadapi Tes Tahdid Mustawa Universitas Islam Madinah (UIM) agar hasil penempatan level bahasa Arab optimal atau langsung masuk jenjang S1.',
+        fullSynopsis: 'Buku panduan khusus untuk menghadapi Tes Tahdid Mustawa Universitas Islam Madinah (UIM)—ujian penempatan level kemampuan bahasa Arab yang menentukan apakah mahasiswa langsung masuk jenjang S1 (Kulliyyah) atau mengikuti kelas persiapan bahasa (Ma\'had Lughoh). Memuat bedah bank soal dan kisi-kisi persiapan agar hasil tes penempatan optimal.',
         highlights: [
-          'Pemetaan sistem & materi ujian Tahdid Mustawa UIM',
-          'Bedah bank soal persiapan Tahdid Mustawa UIM',
-          'Pembahasan soal terstruktur',
-          'Strategi memaksimalkan skor penempatan level'
+          'Pemetaan sistem & alur ujian Tahdid Mustawa UIM',
+          'Bedah bank soal persiapan Tahdid Mustawa UIM terbaru',
+          'Pembahasan soal terstruktur & mudah dipelajari',
+          'Latihan penguasaan kaidah Nahwu, Shorof & Fahmul Maqru\'',
+          'Strategi memaksimalkan skor penempatan level bahasa',
+          'Cocok untuk calon mahasiswa baru UIM'
         ]
       },
       {
         id: 'jurus-ampuh-lipia',
-        category: 'lipia',
-        categoryLabel: 'Jalur LIPIA',
-        badge: 'PANDUAN SELEKSI LIPIA',
-        badgeColor: 'bg-sky-700 text-white',
         title: 'Jurus Ampuh Raih Beasiswa LIPIA',
         subtitle: 'Kupas Tuntas Bank Soal Persiapan Seleksi Beasiswa LIPIA',
+        category: 'lipia',
+        categoryLabel: 'Jalur LIPIA (Umum & Pesantren)',
         price: 165000,
         priceFormatted: 'Rp 165.000',
-        coverImage: 'https://placehold.co/600x750/0369A1/FFFFFF?text=JURUS+AMPUH%0ARAIH+BEASISWA+LIPIA%0A(Bank+Soal+%26+Strategi)',
+        badge: 'Panduan Dasar',
+        badgeColor: 'bg-indigo-600 text-white',
+        coverImage: 'https://placehold.co/600x750/1E40AF/FFFFFF?text=JURUS+AMPUH%0ARAIH+BEASISWA%0ALIPIA%0A%0ABank+Soal+%26+Strategi',
         samplePages: [
           {
-            label: 'Cover Depan',
-            url: 'https://placehold.co/600x750/0369A1/FFFFFF?text=Cover+Depan%0AJurus+Ampuh+Raih+Beasiswa+LIPIA'
+            url: 'https://placehold.co/600x750/1E40AF/FFFFFF?text=Cover+Depan%0AJurus+Ampuh+Raih+Beasiswa+LIPIA',
+            label: 'Cover Depan'
           },
           {
-            label: 'Slot Capture Materi Strategi',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Strategi%0A(Ganti+dengan+Foto+Isi)'
+            url: 'https://placehold.co/600x750/1D4ED8/FFFFFF?text=Slot+Foto%0ACover+Belakang+%2F+Daftar+Isi',
+            label: 'Cover Belakang / Daftar Isi'
           },
           {
-            label: 'Slot Capture Bank Soal',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Bank+Soal%0A(Ganti+dengan+Foto+Soal)'
+            url: 'https://placehold.co/600x750/1E293B/FFFFFF?text=Slot+Capture%0AContoh+Halaman+Soal',
+            label: 'Contoh Halaman Isi'
           }
         ],
-        shortDesc: 'Buku pegangan praktis persiapan seleksi beasiswa LIPIA dari nol. Cocok untuk siswa SMA/SMK maupun santri pesantren/MA.',
-        fullSynopsis: 'Buku pegangan praktis bagi calon pendaftar LIPIA baik dari latar belakang sekolah umum (SMA/SMK) maupun pesantren/MA. Merangkum strategi persiapan seleksi beasiswa LIPIA secara menyeluruh disertai kupas tuntas bank soal latihan agar peserta memiliki gambaran nyata pola ujian sebelum hari seleksi tiba.',
+        shortDesc: 'Buku pegangan praktis bagi calon pendaftar LIPIA dari latar belakang sekolah umum (SMA/SMK) maupun pesantren/MA disertai kupas tuntas bank soal latihan.',
+        fullSynopsis: 'Buku pegangan praktis bagi calon pendaftar LIPIA dari latar belakang sekolah umum (SMA/SMK) maupun pesantren/MA. Merangkum strategi persiapan seleksi beasiswa LIPIA secara menyeluruh disertai kupas tuntas bank soal latihan agar peserta memiliki gambaran nyata sebelum hari ujian tiba.',
         highlights: [
-          'Panduan tahapan seleksi masuk beasiswa LIPIA',
-          'Jurus strategis persiapan bagi siswa SMA maupun santri',
-          'Kupas tuntas bank soal latihan seleksi LIPIA',
-          'Pembahasan terarah untuk mempercepat pemahaman'
+          'Panduan tahapan & jurus strategis seleksi beasiswa LIPIA',
+          'Kupas tuntas bank soal latihan seleksi masuk LIPIA',
+          'Pembahasan terarah untuk mempercepat pemahaman pola soal',
+          'Cocok bagi lulusan SMA/SMK umum maupun santri MA/Pesantren',
+          'Tips persiapan berkas & mental menghadapi tes',
+          'Latihan soal bertahap dari dasar'
         ]
       },
       {
         id: 'timteng-toafl',
-        category: 'timteng',
-        categoryLabel: 'Timur Tengah & TOAFL',
-        badge: 'TIMTENG & TOAFL',
-        badgeColor: 'bg-orange-800 text-white',
         title: 'Sukses Tes Timur Tengah dan TOAFL',
         subtitle: 'Kupas Tuntas Bank Soal Persiapan Seleksi Kuliah Timur Tengah',
+        category: 'timteng',
+        categoryLabel: 'Timur Tengah & TOAFL',
         price: 160000,
         priceFormatted: 'Rp 160.000',
-        coverImage: 'https://placehold.co/600x750/9A3412/FFFFFF?text=SUKSES+TES%0ATIMUR+TENGAH%0A%26+TOAFL',
+        badge: 'Timteng & TOAFL',
+        badgeColor: 'bg-orange-700 text-white',
+        coverImage: 'https://placehold.co/600x750/9A3412/FFFFFF?text=SUKSES+TES%0ATIMUR+TENGAH%0ADAN+TOAFL%0A%0ABank+Soal+%26+Try+Out',
         samplePages: [
           {
-            label: 'Cover Depan',
-            url: 'https://placehold.co/600x750/9A3412/FFFFFF?text=Cover+Depan%0ASukses+Tes+Timur+Tengah+%26+TOAFL'
+            url: 'https://placehold.co/600x750/9A3412/FFFFFF?text=Cover+Depan%0ASukses+Tes+Timur+Tengah+%26+TOAFL',
+            label: 'Cover Depan'
           },
           {
-            label: 'Slot Capture Paket Try Out',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+Try+Out%0A(Ganti+dengan+Foto+Isi)'
+            url: 'https://placehold.co/600x750/C2410C/FFFFFF?text=Slot+Foto%0ACover+Belakang+%2F+Daftar+Isi',
+            label: 'Cover Belakang / Daftar Isi'
           },
           {
-            label: 'Slot Capture Pembahasan TOAFL',
-            url: 'https://placehold.co/600x750/E2E8F0/334155?text=Slot+Capture+TOAFL%0A(Ganti+dengan+Foto+Soal)'
+            url: 'https://placehold.co/600x750/1E293B/FFFFFF?text=Slot+Capture%0AContoh+Halaman+TOAFL',
+            label: 'Contoh Halaman Isi'
           }
         ],
-        shortDesc: 'Kupas tuntas bank soal persiapan seleksi kuliah Timur Tengah (Jalur Kemenag / Umum) dilengkapi paket Try Out TOAFL dan pembahasannya.',
-        fullSynopsis: 'Panduan lengkap bagi pejuang beasiswa dan seleksi kuliah ke berbagai negara Timur Tengah (seperti Mesir/Al-Azhar, Arab Saudi, dll.) sekaligus persiapan ujian standar kemampuan bahasa Arab (TOAFL). Berisi paket Try Out seleksi Timur Tengah, paket Try Out TOAFL, serta pembahasan soal secara sistematis.',
+        shortDesc: 'Panduan lengkap pejuang kuliah ke negara-negara Timur Tengah (Mesir/Al-Azhar, Saudi, dll.) sekaligus persiapan ujian standar bahasa Arab (TOAFL) beserta Try Out.',
+        fullSynopsis: 'Panduan lengkap bagi pejuang beasiswa dan seleksi kuliah ke berbagai negara Timur Tengah (seperti Mesir/Al-Azhar, Arab Saudi, Maroko, dll.) sekaligus persiapan ujian standar kemampuan bahasa Arab (TOAFL). Berisi paket Try Out seleksi Timur Tengah, paket Try Out TOAFL, serta pembahasan soalnya.',
         highlights: [
-          'Paket Try Out Tes Kemenag / Seleksi Timur Tengah + Pembahasan',
-          'Paket Try Out TOAFL (Standar Bahasa Arab) + Pembahasan',
-          'Kamus Mufrodat & istilah penting seleksi',
-          'Tips & strategi menghadapi tes wawancara Timur Tengah'
+          'Kupas tuntas bank soal seleksi kuliah Timur Tengah',
+          'Paket latihan & Try Out TOAFL lengkap dengan pembahasan',
+          'Pemetaan materi Fahmul Masmu\', Tarakib, dan Fahmul Maqru\'',
+          'Tips & strategi meraih skor optimal dalam tes seleksi',
+          'Cocok untuk jalur Kemenag maupun jalur mandiri/beasiswa',
+          'Latihan soal terstruktur untuk evaluasi kesiapan'
         ]
       }
     ];
 
-    // State untuk filter aktif & daftar bundling
+    // State untuk filter aktif & daftar kuantitas buku di form order
     let activeFilter = 'all';
-    let selectedBundleIds = new Set();
+    let orderQuantities = { 'kampus-saudi': 1 };
+    let hasUserCustomizedSelection = false;
 
     // Helper format Rupiah
     function formatRupiah(num) {
       return 'Rp ' + num.toLocaleString('id-ID');
     }
 
-    // Helper membuat URL WhatsApp satuan
-    function buildSingleBookWaUrl(book) {
-      const text = `Assalamu'alaikum Kak, saya mau pesan buku *${book.title.toUpperCase()}* (${book.priceFormatted}). Mohon info ketersediaan stok & klaim Free Ongkir Pulau Jawa / cek ongkir ke alamat saya ya.`;
-      return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(text)}`;
+    // Helper memilih 1 buku tertentu dari kartu/modal dan scroll ke Form Pemesanan
+    function orderSingleBook(bookId) {
+      if (!hasUserCustomizedSelection) {
+        orderQuantities = { [bookId]: 1 };
+      } else if (!orderQuantities[bookId]) {
+        orderQuantities[bookId] = 1;
+      }
+      hasUserCustomizedSelection = true;
+      syncAllOrderUI();
+      focusOrderForm();
+    }
+
+    // Scroll halus ke form pemesanan & fokuskan input nama
+    function focusOrderForm() {
+      const formSection = document.getElementById('form-order');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          const nameInput = document.getElementById('order-name');
+          if (nameInput) nameInput.focus({ preventScroll: true });
+        }, 550);
+      }
+    }
+
+    // Sinkronkan seluruh UI (Katalog, Form Buku, Ringkasan, dan Floating Bar)
+    function syncAllOrderUI() {
+      renderCatalog();
+      renderFormBookList();
+      updateOrderSummary();
+      updateBundlingBar();
     }
 
     // Render grid katalog buku
@@ -865,8 +1095,8 @@
         : BOOKS_DATA.filter(b => b.category === activeFilter);
 
       grid.innerHTML = filteredBooks.map(book => {
-        const isBundled = selectedBundleIds.has(book.id);
-        const waUrl = buildSingleBookWaUrl(book);
+        const qtyInOrder = orderQuantities[book.id] || 0;
+        const isBundled = hasUserCustomizedSelection && qtyInOrder > 0;
 
         return `
           <article class="card-hover bg-white rounded-3xl border ${isBundled ? 'border-sky-500 ring-2 ring-sky-500/20' : 'border-slate-200/90'} shadow-xs overflow-hidden flex flex-col justify-between">
@@ -946,18 +1176,15 @@
                 </div>
               </div>
 
-              <!-- Primary CTA: Pesan Satuan via WA -->
-              <a
-                href="${waUrl}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-full inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-bold text-xs sm:text-sm py-3 px-4 rounded-xl shadow-xs transition-all"
+              <!-- Primary CTA: Pilih & Isi Form Pemesanan -->
+              <button
+                type="button"
+                onclick="orderSingleBook('${book.id}')"
+                class="w-full inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-bold text-xs sm:text-sm py-3 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
               >
-                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 0 0 5.73 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.42ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.88 9.89Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/>
-                </svg>
-                <span>Pesan via WA</span>
-              </a>
+                <span>📝 Pesan Buku Ini</span>
+                <span aria-hidden="true">→</span>
+              </button>
 
               <!-- Secondary Actions: Sinopsis & Pilih Bundling -->
               <div class="grid grid-cols-2 gap-2">
@@ -977,13 +1204,251 @@
                       : 'border-sky-200 bg-sky-50/70 hover:bg-sky-100 text-sky-800'
                   }"
                 >
-                  ${isBundled ? '✓ Terpilih Bundling' : '+ Pilih Bundling'}
+                  ${isBundled ? `✓ Di Form (${qtyInOrder})` : '+ Tambah ke Form'}
                 </button>
               </div>
             </div>
           </article>
         `;
       }).join('');
+    }
+
+    // Render daftar pilihan buku interaktif di dalam Formulir Pemesanan
+    function renderFormBookList() {
+      const container = document.getElementById('form-book-list');
+      if (!container) return;
+
+      container.innerHTML = BOOKS_DATA.map(book => {
+        const qty = orderQuantities[book.id] || 0;
+        const isSelected = qty > 0;
+
+        return `
+          <div class="flex items-center justify-between gap-3 p-3 sm:p-3.5 rounded-2xl border transition-all ${
+            isSelected
+              ? 'border-sky-500 bg-sky-50/60 shadow-2xs'
+              : 'border-slate-200 bg-white hover:border-slate-300'
+          }">
+            <div class="flex items-start gap-3 min-w-0">
+              <input
+                type="checkbox"
+                id="chk-${book.id}"
+                ${isSelected ? 'checked' : ''}
+                onchange="toggleFormBook('${book.id}')"
+                class="mt-1 w-4 h-4 rounded accent-sky-700 cursor-pointer shrink-0"
+              />
+              <label for="chk-${book.id}" class="cursor-pointer min-w-0">
+                <div class="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
+                  ${book.title}
+                </div>
+                <div class="text-[11px] sm:text-xs font-semibold text-sky-700 mt-0.5">
+                  ${book.priceFormatted},- <span class="text-slate-400 font-normal">• ${book.categoryLabel}</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- Kontrol Jumlah (Stepper) -->
+            <div class="shrink-0">
+              ${
+                isSelected
+                  ? `<div class="inline-flex items-center bg-white border border-sky-300 rounded-xl overflow-hidden shadow-2xs">
+                      <button type="button" onclick="changeBookQty('${book.id}', -1)" class="w-8 h-8 flex items-center justify-center text-slate-700 hover:bg-slate-100 font-bold text-sm" aria-label="Kurangi jumlah">−</button>
+                      <span class="w-8 text-center text-xs sm:text-sm font-extrabold text-slate-900">${qty}</span>
+                      <button type="button" onclick="changeBookQty('${book.id}', 1)" class="w-8 h-8 flex items-center justify-center text-sky-700 hover:bg-sky-50 font-bold text-sm" aria-label="Tambah jumlah">+</button>
+                    </div>`
+                  : `<button type="button" onclick="changeBookQty('${book.id}', 1)" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-sky-300 text-xs font-semibold text-slate-700 hover:text-sky-800 transition-colors">
+                      + Pilih
+                    </button>`
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Toggle checkbox buku di dalam form
+    function toggleFormBook(bookId) {
+      hasUserCustomizedSelection = true;
+      if (orderQuantities[bookId]) {
+        delete orderQuantities[bookId];
+      } else {
+        orderQuantities[bookId] = 1;
+      }
+      clearFormError();
+      syncAllOrderUI();
+    }
+
+    // Ubah jumlah eksemplar buku (+ / -)
+    function changeBookQty(bookId, delta) {
+      hasUserCustomizedSelection = true;
+      const current = orderQuantities[bookId] || 0;
+      const next = current + delta;
+      if (next <= 0) {
+        delete orderQuantities[bookId];
+      } else {
+        orderQuantities[bookId] = next;
+      }
+      clearFormError();
+      syncAllOrderUI();
+    }
+
+    // Perbarui tampilan kartu wilayah pengiriman (Pulau Jawa vs Luar Jawa)
+    function handleRegionChange() {
+      const region = document.querySelector('input[name="shipping_region"]:checked')?.value || 'jawa';
+      const cardJawa = document.getElementById('region-card-jawa');
+      const cardLuar = document.getElementById('region-card-luar');
+
+      if (region === 'jawa') {
+        cardJawa.className = 'relative flex items-start gap-3 p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50/50 cursor-pointer transition-all';
+        cardLuar.className = 'relative flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 cursor-pointer transition-all';
+      } else {
+        cardJawa.className = 'relative flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-300 cursor-pointer transition-all';
+        cardLuar.className = 'relative flex items-start gap-3 p-3.5 rounded-2xl border-2 border-sky-500 bg-sky-50/50 cursor-pointer transition-all';
+      }
+      updateOrderSummary();
+    }
+
+    // Perbarui Ringkasan Pesanan di Kolom Kanan Form
+    function updateOrderSummary() {
+      const itemsListEl = document.getElementById('summary-items-list');
+      const badgeQtyEl = document.getElementById('summary-badge-qty');
+      const subtotalEl = document.getElementById('summary-subtotal');
+      const shippingEl = document.getElementById('summary-shipping');
+      const grandTotalEl = document.getElementById('summary-grand-total');
+      const shippingNoteEl = document.getElementById('summary-shipping-note');
+
+      if (!itemsListEl) return;
+
+      const selectedItems = BOOKS_DATA
+        .filter(b => (orderQuantities[b.id] || 0) > 0)
+        .map(b => ({
+          ...b,
+          qty: orderQuantities[b.id],
+          lineTotal: b.price * orderQuantities[b.id]
+        }));
+
+      const totalQty = selectedItems.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = selectedItems.reduce((sum, item) => sum + item.lineTotal, 0);
+      const region = document.querySelector('input[name="shipping_region"]:checked')?.value || 'jawa';
+
+      badgeQtyEl.textContent = `${totalQty} Buku`;
+      subtotalEl.textContent = formatRupiah(subtotal);
+      grandTotalEl.textContent = formatRupiah(subtotal);
+
+      if (selectedItems.length === 0) {
+        itemsListEl.innerHTML = `
+          <div class="p-3.5 rounded-2xl bg-slate-800/70 border border-slate-700 text-slate-400 text-xs text-center">
+            Belum ada buku yang dipilih. Silakan centang minimal 1 judul buku di sebelah kiri.
+          </div>
+        `;
+      } else {
+        itemsListEl.innerHTML = selectedItems.map(item => `
+          <div class="flex items-start justify-between gap-3 bg-slate-800/60 px-3.5 py-2.5 rounded-xl border border-slate-800">
+            <div class="min-w-0">
+              <div class="font-bold text-slate-100 leading-snug">${item.title}</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">${item.qty} eks × ${item.priceFormatted}</div>
+            </div>
+            <div class="font-bold text-amber-300 shrink-0">${formatRupiah(item.lineTotal)}</div>
+          </div>
+        `).join('');
+      }
+
+      if (region === 'jawa') {
+        shippingEl.textContent = 'GRATIS (Pulau Jawa)';
+        shippingEl.className = 'font-bold text-emerald-400';
+        shippingNoteEl.textContent = '*Sudah termasuk promo Gratis Ongkir ke seluruh wilayah Pulau Jawa.';
+      } else {
+        shippingEl.textContent = 'Cek Tarif Hemat via WA';
+        shippingEl.className = 'font-bold text-amber-300';
+        shippingNoteEl.textContent = '*Ongkos kirim luar Pulau Jawa akan diinfokan sesuai kecamatan/kota tujuan Anda.';
+      }
+    }
+
+    function showFormError(message) {
+      const box = document.getElementById('form-error-box');
+      if (!box) return;
+      box.textContent = message;
+      box.classList.remove('hidden');
+    }
+
+    function clearFormError() {
+      const box = document.getElementById('form-error-box');
+      if (!box) return;
+      box.textContent = '';
+      box.classList.add('hidden');
+    }
+
+    // Validasi & Kirim Pesanan Terformat ke WhatsApp Mitra Reseller
+    function submitOrderToWa(event) {
+      event.preventDefault();
+      clearFormError();
+
+      const selectedItems = BOOKS_DATA
+        .filter(b => (orderQuantities[b.id] || 0) > 0)
+        .map(b => ({
+          ...b,
+          qty: orderQuantities[b.id],
+          lineTotal: b.price * orderQuantities[b.id]
+        }));
+
+      if (selectedItems.length === 0) {
+        showFormError('Silakan pilih minimal 1 judul buku terlebih dahulu sebelum mengirim pesanan.');
+        return;
+      }
+
+      const name = document.getElementById('order-name').value.trim();
+      const phone = document.getElementById('order-phone').value.trim();
+      const address = document.getElementById('order-address').value.trim();
+      const notes = document.getElementById('order-notes').value.trim();
+      const region = document.querySelector('input[name="shipping_region"]:checked')?.value || 'jawa';
+
+      if (!name) {
+        showFormError('Mohon isi Nama Lengkap Penerima terlebih dahulu.');
+        document.getElementById('order-name').focus();
+        return;
+      }
+      if (!phone) {
+        showFormError('Mohon isi Nomor WhatsApp Aktif agar mudah dihubungi.');
+        document.getElementById('order-phone').focus();
+        return;
+      }
+      if (!address) {
+        showFormError('Mohon isi Alamat Lengkap Pengiriman (beserta Kecamatan & Kota/Kabupaten).');
+        document.getElementById('order-address').focus();
+        return;
+      }
+
+      const totalQty = selectedItems.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = selectedItems.reduce((sum, item) => sum + item.lineTotal, 0);
+      const shippingLabel = region === 'jawa'
+        ? 'Pulau Jawa (FREE ONGKIR Rp 0)'
+        : 'Luar Pulau Jawa (Mohon info ongkir ke alamat di bawah)';
+
+      const itemsText = selectedItems
+        .map((item, idx) => `${idx + 1}. *${item.title}* (${item.qty} eks × ${item.priceFormatted}) = ${formatRupiah(item.lineTotal)}`)
+        .join('\n');
+
+      const waMessage = [
+        `Assalamu'alaikum Kak, saya mau pesan buku original *ITAF Press* melalui form katalog:`,
+        ``,
+        `*DAFTAR PESANAN:*`,
+        itemsText,
+        ``,
+        `• Total Buku: *${totalQty} Eksemplar*`,
+        `• Subtotal Buku: *${formatRupiah(subtotal)}*`,
+        `• Wilayah Ongkir: *${shippingLabel}*`,
+        `• Estimasi Total Bayar: *${formatRupiah(subtotal)}*${region === 'luar-jawa' ? ' (+ ongkir luar Jawa)' : ''}`,
+        ``,
+        `*DATA PENGIRIMAN:*`,
+        `• Nama Penerima: ${name}`,
+        `• No. WhatsApp: ${phone}`,
+        `• Alamat Lengkap: ${address}`,
+        notes ? `• Sekolah/Pesantren/Catatan: ${notes}` : null,
+        ``,
+        `Mohon konfirmasi ketersediaan stok & rincian pembayarannya ya Kak. Terima kasih!`
+      ].filter(line => line !== null).join('\n');
+
+      const waUrl = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(waMessage)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
     // Filter kategori buku
@@ -999,51 +1464,45 @@
       renderCatalog();
     }
 
-    // Toggle pilihan bundling multi-buku
+    // Toggle pilihan bundling multi-buku dari kartu katalog
     function toggleBundle(bookId) {
-      if (selectedBundleIds.has(bookId)) {
-        selectedBundleIds.delete(bookId);
+      hasUserCustomizedSelection = true;
+      if (orderQuantities[bookId]) {
+        delete orderQuantities[bookId];
       } else {
-        selectedBundleIds.add(bookId);
+        orderQuantities[bookId] = 1;
       }
-      renderCatalog();
-      updateBundlingBar();
+      clearFormError();
+      syncAllOrderUI();
     }
 
     // Reset bundling
     function clearBundle() {
-      selectedBundleIds.clear();
-      renderCatalog();
-      updateBundlingBar();
+      orderQuantities = {};
+      hasUserCustomizedSelection = true;
+      clearFormError();
+      syncAllOrderUI();
     }
 
-    // Perbarui Floating Bundling Bar & Link WA Gabungan
+    // Perbarui Floating Bundling Bar
     function updateBundlingBar() {
       const bar = document.getElementById('bundling-bar');
       const mobileSticky = document.getElementById('mobile-sticky-cta');
       const countEl = document.getElementById('bundling-count');
       const totalEl = document.getElementById('bundling-total');
-      const waLinkEl = document.getElementById('bundling-wa-link');
 
-      const selectedBooks = BOOKS_DATA.filter(b => selectedBundleIds.has(b.id));
+      const selectedBooks = BOOKS_DATA.filter(b => (orderQuantities[b.id] || 0) > 0);
 
-      if (selectedBooks.length === 0) {
+      if (!hasUserCustomizedSelection || selectedBooks.length === 0) {
         bar.classList.add('translate-y-full');
         if (mobileSticky) mobileSticky.classList.remove('hidden');
         return;
       }
 
-      const totalPrice = selectedBooks.reduce((sum, b) => sum + b.price, 0);
-      countEl.textContent = `${selectedBooks.length} Buku`;
+      const totalQty = selectedBooks.reduce((sum, b) => sum + orderQuantities[b.id], 0);
+      const totalPrice = selectedBooks.reduce((sum, b) => sum + (b.price * orderQuantities[b.id]), 0);
+      countEl.textContent = `${totalQty} Buku`;
       totalEl.textContent = formatRupiah(totalPrice);
-
-      const listText = selectedBooks
-        .map((b, idx) => `${idx + 1}. *${b.title}* (${b.priceFormatted})`)
-        .join('\n');
-
-      const waMessage = `Assalamu'alaikum Kak, saya mau pesan paket bundling buku ITAF Press berikut:\n\n${listText}\n\nTotal: *${formatRupiah(totalPrice)}*\nMohon info stok & klaim Free Ongkir Pulau Jawa / cek ongkir ke alamat saya ya.`;
-
-      waLinkEl.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(waMessage)}`;
 
       bar.classList.remove('translate-y-full');
       if (mobileSticky) mobileSticky.classList.add('hidden');
@@ -1059,7 +1518,14 @@
       document.getElementById('modal-subtitle').textContent = book.subtitle;
       document.getElementById('modal-price').textContent = `${book.priceFormatted},-`;
       document.getElementById('modal-synopsis').textContent = book.fullSynopsis;
-      document.getElementById('modal-wa-btn').href = buildSingleBookWaUrl(book);
+
+      const modalOrderBtn = document.getElementById('modal-order-btn');
+      if (modalOrderBtn) {
+        modalOrderBtn.onclick = () => {
+          closeBookModal();
+          orderSingleBook(book.id);
+        };
+      }
 
       // Render Galeri Cover & Slot Capture Isi
       const galleryEl = document.getElementById('modal-gallery');
@@ -1129,7 +1595,7 @@
 
     // Inisialisasi saat halaman dimuat
     window.addEventListener('DOMContentLoaded', () => {
-      renderCatalog();
+      syncAllOrderUI();
     });
   </script>
 </body>
